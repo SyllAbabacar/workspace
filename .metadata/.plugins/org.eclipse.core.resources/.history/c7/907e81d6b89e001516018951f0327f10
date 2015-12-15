@@ -1,0 +1,59 @@
+package tn.ipsas.dao;
+
+import java.util.ArrayList;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import tn.ipsas.model.CompteBancaire;
+
+/**
+ * Session Bean implementation class CompteBancaireDAO
+ */
+@Stateless
+public class CompteBancaireDAO implements CompteBancaireDAOLocal {
+	@PersistenceContext
+	private EntityManager em;
+
+	/**
+	 * Default constructor.
+	 */
+
+	public void save(CompteBancaire compteBancaire) {
+		em.persist(compteBancaire);
+	}
+
+	public CompteBancaire getById(long rip) {
+		CompteBancaire c = null;
+		c = em.find(CompteBancaire.class, rip);
+		return c;
+	}
+
+	public void remove(CompteBancaire compteBancaire) {
+		em.remove(compteBancaire);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<CompteBancaire> getAll() {
+		ArrayList<CompteBancaire> list = new ArrayList<CompteBancaire>();
+		list = (ArrayList<CompteBancaire>) em.createNamedQuery("allComptes")
+				.getResultList();
+		return list;
+	}
+
+	public void update(CompteBancaire compteBancaire) {
+		em.merge(compteBancaire);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<CompteBancaire> getByCin(String cin) {
+		em.getTransaction().begin();
+		ArrayList<CompteBancaire> list = new ArrayList<CompteBancaire>();
+		list = (ArrayList<CompteBancaire>) em.createQuery(" FROM  CompteBancaire c WHERE c.client_id='"+cin+"'").getResultList();
+		em.getTransaction().commit();
+		return list;
+	} 
+
+}

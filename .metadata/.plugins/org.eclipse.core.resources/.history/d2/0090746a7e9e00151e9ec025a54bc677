@@ -1,0 +1,19 @@
+package tn.ipsas.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+
+@Entity
+public class ClientBanque {
+	@Id
+	private String cin;
+	private String nom;
+	private String prenom;
+	@OneToOne(mappedBy="Client")
+	CompteBancaire comte;
+	
+	
+
+}

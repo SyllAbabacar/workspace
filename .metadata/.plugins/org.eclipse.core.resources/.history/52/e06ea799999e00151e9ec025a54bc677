@@ -1,0 +1,67 @@
+package tn.ipsas.service;
+
+import java.util.ArrayList;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+
+import tn.ipsas.dao.ClientBanqueDAOLocal;
+import tn.ipsas.dao.CompteBancaireDAOLocal;
+import tn.ipsas.dto.CompteBancaireDTO;
+import tn.ipsas.model.ClientBanque;
+import tn.ipsas.model.CompteBancaire;
+import tn.ipsas.util.ClientBancaireHelper;
+import tn.ipsas.util.CompteBancaireHelper;
+
+/**
+ * Session Bean implementation class CompteBancaireService
+ */
+@Stateless
+@WebService(endpointInterface = "tn.ipsas.service.CompteBancaireServiceWS")
+public class CompteBancaireService implements CompteBancaireServiceLocal,CompteBancaireServiceRemote {
+
+	@EJB
+	CompteBancaireDAOLocal dao;
+	@EJB
+	ClientBanqueDAOLocal daoClient;
+
+	public void ajoutCompteBancaire(CompteBancaireDTO compteBancaireDTO) {
+		// DTO ---> Entity
+		CompteBancaire model = CompteBancaireHelper
+				.dtoToModel(compteBancaireDTO);
+		// Appel du DAO pour le stockage
+		dao.save(model);
+	}
+
+	public boolean supprimerCompteBancaire(long rib) {
+		boolean done = false;
+		CompteBancaire cb = dao.getById(rib);
+		ClientBanque cl =cb.getClient();
+		if (cb != null) {
+			dao.remove(cb);	 
+			daoClient.remove(cl);
+			done = true;
+		}
+		return done;
+	}
+	public ArrayList<CompteBancaireDTO> listDesComptes()
+	{
+
+		ArrayList<CompteBancaire> listcb = dao.getAll();
+		ArrayList<CompteBancaireDTO> listdto = (ArrayList<CompteBancaireDTO>) CompteBancaireHelper.listModelToDto(listcb);
+		return listdto;	
+	}
+	public CompteBancaireDTO getCompteBancaire(long rib)
+	{
+		CompteBancaire cb = dao.getById(rib);
+		CompteBancaireDTO dto = CompteBancaireHelper.modelTodto(cb);
+		return dto;
+	}
+	public void update(CompteBancaireDTO dto)
+	{
+		CompteBancaire model = CompteBancaireHelper.dtoToModel(dto);
+		model.setRip(dto.getRip());
+		dao.update(model);
+	}
+}

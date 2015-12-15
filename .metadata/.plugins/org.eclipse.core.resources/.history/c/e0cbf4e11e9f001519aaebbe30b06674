@@ -1,0 +1,22 @@
+package tn.ipsas.service;
+
+import java.util.ArrayList;
+
+import javax.ejb.Remote;
+import javax.jws.WebService;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+
+@WebService
+@javax.jws.soap.SOAPBinding(style = javax.jws.soap.SOAPBinding.Style.RPC)
+public interface ClientBancaireServiceWS {
+	void ajoutClientBancaire(ClientBanqueDTO clientDTO);
+
+	boolean supprimerClient(String cin);
+
+	ArrayList<ClientBanqueDTO> listDesComptes();
+
+	ClientBanqueDTO getClientBancaire(String cin);
+
+	void update(ClientBanqueDTO dto);
+}

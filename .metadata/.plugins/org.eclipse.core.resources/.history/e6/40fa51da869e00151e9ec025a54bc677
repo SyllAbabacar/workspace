@@ -1,0 +1,60 @@
+package tn.ipsas.util;
+
+import java.util.ArrayList;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+import tn.ipsas.dto.CompteBancaireDTO;
+import tn.ipsas.model.ClientBanque;
+import tn.ipsas.model.CompteBancaire;
+
+public class CompteBancaireHelper {
+
+	public static CompteBancaire dtoToModel(CompteBancaireDTO compteBancaireDTO) {
+		CompteBancaire model = new CompteBancaire();
+		ClientBanque modelClient = new ClientBanque();
+		modelClient = clientDtotoClientBanque(compteBancaireDTO.getClient());
+		model.setClient(modelClient);
+	    model.setSolde(compteBancaireDTO.getSolde());
+		return model;
+	}
+   public static CompteBancaireDTO modelTodto(CompteBancaire cb)
+   {
+	   CompteBancaireDTO dto = new CompteBancaireDTO();
+	   ClientBanqueDTO clientDTO = new ClientBanqueDTO();
+	   dto.setRip(cb.getRip());
+	   clientDTO = clientToClientBanqueDTO(cb.getClient());
+	   dto.setClient(cb.getClient());
+	   dto.setSolde(cb.getSolde());
+	return dto;
+   }
+   
+   public static ClientBanque clientDtotoClientBanque(ClientBanqueDTO clientdto)
+   {
+	 ClientBanque model = new ClientBanque();
+	 model.setCin(clientdto.getCin());
+	 model.setNom(clientdto.getNom());
+	 model.setPrenom(clientdto.getPrenom());
+	return model;
+   }
+	   public static ClientBanqueDTO clientToClientBanqueDTO(ClientBanque client)
+	   {
+		 ClientBanqueDTO model = new ClientBanqueDTO();
+		 model.setCin(client.getCin());
+		 model.setNom(client.getNom());
+		 model.setPrenom(client.getPrenom());
+		return model;
+	   
+   }
+   public static ArrayList<CompteBancaireDTO> listModelToDto(ArrayList<CompteBancaire> listcb)
+   {
+	   ArrayList<CompteBancaireDTO> listcbdto = new ArrayList<CompteBancaireDTO>();
+	   if(listcb != null)
+	   {
+		   for(CompteBancaire cb : listcb)
+		   {
+			   listcbdto.add(modelTodto(cb));
+		   }
+	   }
+	   return listcbdto;
+   }
+}

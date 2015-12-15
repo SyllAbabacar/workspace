@@ -1,0 +1,18 @@
+package tn.ipsas.service;
+
+import java.util.ArrayList;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlAnyAttribute;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+
+@WebService
+@javax.jws.soap.SOAPBinding(style = javax.jws.soap.SOAPBinding.Style.RPC)
+public interface ClientBancaireServiceWS {
+	@WebMethod
+	void ajoutClientBancaire(ClientBanqueDTO clientDTO);
+	@WebMethod
+	ArrayList<ClientBanqueDTO> listDesComptes();
+}

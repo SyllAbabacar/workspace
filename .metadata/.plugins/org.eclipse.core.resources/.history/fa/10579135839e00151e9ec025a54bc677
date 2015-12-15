@@ -1,0 +1,36 @@
+package tn.ipsas.util;
+
+import java.util.ArrayList;
+
+import tn.ipsas.dto.CompteBancaireDTO;
+import tn.ipsas.model.CompteBancaire;
+
+public class CompteBancaireHelper {
+
+	public static CompteBancaire dtoToModel(CompteBancaireDTO compteBancaireDTO) {
+		CompteBancaire model = new CompteBancaire();
+		model.setClient(compteBancaireDTO.getClient());
+	    model.setSolde(compteBancaireDTO.getSolde());
+		return model;
+	}
+   public static CompteBancaireDTO modelTodto(CompteBancaire cb)
+   {
+	   CompteBancaireDTO dto = new CompteBancaireDTO();
+	   dto.setRip(cb.getRip());
+	   dto.setNomClient(cb.getNomClient());
+	   dto.setSolde(cb.getSolde());
+	return dto;
+   }
+   public static ArrayList<CompteBancaireDTO> listModelToDto(ArrayList<CompteBancaire> listcb)
+   {
+	   ArrayList<CompteBancaireDTO> listcbdto = new ArrayList<CompteBancaireDTO>();
+	   if(listcb != null)
+	   {
+		   for(CompteBancaire cb : listcb)
+		   {
+			   listcbdto.add(modelTodto(cb));
+		   }
+	   }
+	   return listcbdto;
+   }
+}

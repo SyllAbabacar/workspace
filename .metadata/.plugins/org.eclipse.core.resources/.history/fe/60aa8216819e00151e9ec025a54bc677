@@ -1,0 +1,73 @@
+package tn.ipsas.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQuery(name = "allComptes", query = "select object(c) from  CompteBancaire c")
+public class CompteBancaire implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long rip;
+	private float solde;
+	private String nomClient;
+	@ManyToOne
+	@JoinColumn(name="Client.id")
+	ClientBanque client;
+
+	public CompteBancaire() {
+		super();
+	}
+
+	public CompteBancaire(float solde, String nomClient) {
+		super();
+		this.solde = solde;
+		this.nomClient = nomClient;
+	}
+
+	public long getRip() {
+		return rip;
+	}
+
+	public void setRip(long rip) {
+		this.rip = rip;
+	}
+
+	public float getSolde() {
+		return solde;
+	}
+
+	public void setSolde(float solde) {
+		this.solde = solde;
+	}
+
+	public String getNomClient() {
+		return nomClient;
+	}
+
+	public void setNomClient(String nomClient) {
+		this.nomClient = nomClient;
+	}
+
+	public ClientBanque getClient() {
+		return client;
+	}
+
+	public void setClient(ClientBanque client) {
+		this.client = client;
+	}
+	
+
+}

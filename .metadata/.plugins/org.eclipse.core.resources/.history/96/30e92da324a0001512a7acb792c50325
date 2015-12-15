@@ -1,0 +1,13 @@
+package tn.ipsas.service;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+
+@WebService
+@javax.jws.soap.SOAPBinding(style = javax.jws.soap.SOAPBinding.Style.RPC)
+public interface ClientBancaireServiceWS {
+	@WebMethod
+	void ajoutClientBancaire(ClientBanqueDTO clientDTO);
+}

@@ -1,0 +1,24 @@
+package tn.ipsas.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.Remote;
+
+
+
+
+
+
+import tn.ipsas.dto.ClientBanqueDTO;
+
+@Remote
+public interface ClientBancaireServiceRemote {
+	void ajoutCompteBancaire(ClientBanqueDTO clientDTO);
+
+	boolean supprimerCompteBancaire(long rib);
+
+	List<ClientBanqueDTO> listDesComptes();
+	ClientBanqueDTO getCompteBancaire(long rib);
+	void update(ClientBanqueDTO dto);
+}

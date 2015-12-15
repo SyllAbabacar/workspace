@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page import="tn.ipsas.dto.ClientBanqueDTO"%>
+<%!long solde;
+	String nomClient = "";
+	long rib;%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="AjoutCBServelet" method="post">
+		<table>
+			<%-- <%
+				if (session.getAttribute("dto") != null) {
+					CompteBancaireDTO dto = (CompteBancaireDTO) session
+							.getAttribute("dto");
+					solde = (long) dto.getSolde();
+					nomClient = dto.getClient();
+					rib = (long) dto.getRip();
+			%>
+			<input type="hidden" name="rib" value="<%=rib%>" />
+			<%
+				}
+			%> --%>
+
+			<tr>
+				<td>Solde</td>
+				<td><input type="text" name="solde" <%-- value="<%=solde%>" --%> /></td>
+			</tr>
+			<tr>
+				<td>Cin</td>
+				<td><input type="text" name="cinClient" <%-- value="<%=nomClient%>" --%> /></td>
+			</tr>
+			<tr>
+			<tr>
+				<td>Nom</td>
+				<td><input type="text" name="nomClient" <%-- value="<%=nomClient%>" --%> /></td>
+			</tr>
+			<tr>
+				<td>Prenom</td>
+				<td><input type="text" name="prenomClient" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="submit"
+					<%if (session.getAttribute("dto") != null) {%> value="Valider"
+					<%} else {%> value="Ajouter" <%}%> /></td>
+			</tr>
+		</table>
+	</form>

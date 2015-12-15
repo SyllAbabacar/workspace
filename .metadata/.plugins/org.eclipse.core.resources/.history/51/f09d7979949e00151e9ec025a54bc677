@@ -1,0 +1,55 @@
+package tn.ipsas.dao;
+
+import java.util.ArrayList;
+
+
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import tn.ipsas.model.ClientBanque;
+
+/**
+ * Session Bean implementation class CompteBancaireDAO
+ */
+@Stateless
+public class ClientBanqueDAO implements ClientBanqueDAOLocal {
+	@PersistenceContext
+	private EntityManager em;
+
+	/**
+	 * Default constructor.
+	 */
+
+	public void save(ClientBanque c) {
+		em.persist(c);
+	}
+
+	public ClientBanque getById(String rip) {
+		ClientBanque c = null;
+		c = em.find(ClientBanque.class, rip);
+		return c;
+	}
+
+	public void remove(ClientBanque clientBanque) {
+		em.remove(clientBanque);
+	}
+	@SuppressWarnings("unchecked")
+	public ArrayList<ClientBanque> getAll()
+	{
+		ArrayList<ClientBanque> list = new ArrayList<ClientBanque>();
+		list = (ArrayList<ClientBanque>) em.createNamedQuery("allComptesClient").getResultList();
+		return list;
+	}
+
+	@Override
+	public void update(ClientBanque clientBnaque) {
+		// TODO Auto-generated method stub
+		em.merge(clientBnaque);
+	}
+
+
+
+
+}

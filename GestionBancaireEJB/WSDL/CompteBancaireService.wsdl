@@ -1,0 +1,47 @@
+<definitions name='CompteBancaireServiceService' targetNamespace='http://service.ipsas.tn/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://service.ipsas.tn/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://service.ipsas.tn/' version='1.0' xmlns:tns='http://service.ipsas.tn/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:complexType name='compteBancaireDTO'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='client' type='tns:clientBanqueDTO'/>
+     <xs:element name='rip' type='xs:long'/>
+     <xs:element name='solde' type='xs:float'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='clientBanqueDTO'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='cin' type='xs:string'/>
+     <xs:element minOccurs='0' name='nom' type='xs:string'/>
+     <xs:element minOccurs='0' name='prenom' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='CompteBancaireServiceWS_ajoutCompteBancaireResponse'></message>
+ <message name='CompteBancaireServiceWS_ajoutCompteBancaire'>
+  <part name='arg0' type='tns:compteBancaireDTO'></part>
+ </message>
+ <portType name='CompteBancaireServiceWS'>
+  <operation name='ajoutCompteBancaire' parameterOrder='arg0'>
+   <input message='tns:CompteBancaireServiceWS_ajoutCompteBancaire'></input>
+   <output message='tns:CompteBancaireServiceWS_ajoutCompteBancaireResponse'></output>
+  </operation>
+ </portType>
+ <binding name='CompteBancaireServiceWSBinding' type='tns:CompteBancaireServiceWS'>
+  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='ajoutCompteBancaire'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body namespace='http://service.ipsas.tn/' use='literal'/>
+   </input>
+   <output>
+    <soap:body namespace='http://service.ipsas.tn/' use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='CompteBancaireServiceService'>
+  <port binding='tns:CompteBancaireServiceWSBinding' name='CompteBancaireServicePort'>
+   <soap:address location='http://127.0.0.1:8888/GestionBancaireEAR-GestionBancaireEJB/CompteBancaireService'/>
+  </port>
+ </service>
+</definitions>

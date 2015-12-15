@@ -1,0 +1,24 @@
+package tn.ipsas.util;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+import tn.ipsas.model.ClientBanque;
+
+public class ClientBancaireHelper {
+
+	public static ClientBanque dtoToModel(ClientBanqueDTO clientdto) {
+		ClientBanque model = new ClientBanque();
+		model.setCin(clientdto.getCin());
+		model.setNom(clientdto.getNom());
+		model.setPrenom(clientdto.getPrenom());
+		return model;
+	}
+
+	public static ClientBanqueDTO modelToDto(ClientBanque client) {
+		ClientBanqueDTO model = new ClientBanqueDTO();
+		model.setCin(client.getCin());
+		model.setNom(client.getNom());
+		model.setPrenom(client.getPrenom());
+		return model;
+
+	}
+}

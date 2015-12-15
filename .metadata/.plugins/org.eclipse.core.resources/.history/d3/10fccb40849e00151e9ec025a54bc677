@@ -1,0 +1,5 @@
+package tn.ipsas.dto;
+
+public class ClientBanqueDTO {
+
+}

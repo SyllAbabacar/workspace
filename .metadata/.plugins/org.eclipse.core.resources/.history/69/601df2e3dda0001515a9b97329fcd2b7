@@ -1,0 +1,83 @@
+package tn.ipsas.control;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import tn.ipsas.dto.ClientBanqueDTO;
+import tn.ipsas.dto.CompteBancaireDTO;
+import tn.ipsas.service.ClientBancaireServiceLocal;
+import tn.ipsas.service.CompteBancaireServiceLocal;
+
+/**
+ * Servlet implementation class AjoutCBServelet
+ */
+public class AjoutCBServelet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	@EJB
+	CompteBancaireServiceLocal compteBancaireService;
+	@EJB
+	ClientBancaireServiceLocal clientService;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AjoutCBServelet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		long solde = Long.parseLong(request.getParameter("solde"));
+		ClientBanqueDTO clientdto = new ClientBanqueDTO();
+		CompteBancaireDTO dto = new CompteBancaireDTO();
+		dto.setSolde(solde);
+		if ((request.getParameter("valider") != null)
+				&& ((request.getParameter("valider")
+						.equalsIgnoreCase("Ajouter")) || (request
+						.getParameter("valider").equalsIgnoreCase("Valider")))) {
+			String cinClient = request.getParameter("cinClient");
+			String nomClient = request.getParameter("nomClient");
+			String prenomClient = request.getParameter("prenomClient");
+			clientdto.setCin(cinClient);
+			clientdto.setNom(nomClient);
+			clientdto.setPrenom(prenomClient);
+			dto.setClient(clientdto);
+			if (request.getParameter("rib") != null) {
+				dto.setRip(Long.parseLong(request.getParameter("rib")));
+				clientService.update(clientdto);
+				compteBancaireService.update(dto);
+				request.getSession().removeAttribute("dto");
+				response.sendRedirect("ServiceServelet");
+			} else {
+				clientService.ajoutClientBancaire(clientdto);
+				compteBancaireService.ajoutCompteBancaire(dto);
+				response.sendRedirect("Accueil.html");
+			}
+
+		}
+		if (request.getParameter("valider") != null
+				&& (request.getParameter("valider")
+						.equalsIgnoreCase("AjouterCompteBancaire"))) {
+			String cin = request.getParameter("client");
+			clientdto = clientService.getClientBancaire(cin);
+			dto.setClient(clientdto);
+			compteBancaireService.ajoutCompteBancaire(dto);
+			response.sendRedirect("ajoutCompteBancaire.jsp");
+
+		}
+
+	}
+
+}

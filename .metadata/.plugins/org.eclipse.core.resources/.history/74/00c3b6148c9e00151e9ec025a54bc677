@@ -1,0 +1,20 @@
+package tn.ipsas.dao;
+
+import java.util.ArrayList;
+
+import javax.ejb.Local;
+
+import tn.ipsas.model.CompteBancaire;
+
+@Local
+public interface ClientBanqueDAOLocal {
+	void save(CompteBancaire compteBancaire);
+
+	void remove(CompteBancaire compteBancaire);
+
+	CompteBancaire getById(long rip);
+	
+	void update(CompteBancaire compteBancaire);
+
+	ArrayList<CompteBancaire> getAll();
+}

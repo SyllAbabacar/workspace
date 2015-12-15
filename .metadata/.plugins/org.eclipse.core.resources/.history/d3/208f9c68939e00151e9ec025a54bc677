@@ -1,0 +1,18 @@
+package tn.ipsas.service;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import tn.ipsas.dto.CompteBancaireDTO;
+
+@Local
+public interface ClientBancaireServiceLocal {
+	void ajoutCompteBancaire(CompteBancaireDTO compteBancaireDTO);
+
+	boolean supprimerCompteBancaire(long rib);
+
+	List<CompteBancaireDTO> listDesComptes();
+	CompteBancaireDTO getCompteBancaire(long rib);
+	void update(CompteBancaireDTO dto);
+}

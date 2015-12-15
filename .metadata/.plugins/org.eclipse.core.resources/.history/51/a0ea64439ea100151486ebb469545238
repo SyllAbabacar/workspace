@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div align="center">
+
+		<form action="ServiceServelet" method="post">
+			<input type="submit" value="Ajouter CompteBancaire"
+				name="ajoutercompte" />
+		</form>
+		<a href="ajoutcb.jsp"><button value="Ajouter CompteBancaire">Ajouter
+				Client</button></a>
+		<form action="ServiceServelet" method="post">
+			<input type="submit" value="ListerCompteBancaire" name="listerCompte" />
+		</form>
+
+	</div>
+</body>
+</html>

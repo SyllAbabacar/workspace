@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page import="tn.ipsas.dto.ClientBanqueDTO"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="AjoutCBServelet" method="post">
+		<table>
+			<tr>
+				<td>Solde</td>
+				<td><input type="text" name="solde" <%-- value="<%=solde%>" --%> /></td>
+			</tr>
+			<tr>
+				<td>Liste des clients </td>
+				<td><select name="client"> 
+				    <%
+					ArrayList<ClientBan> listecb = (ArrayList<CompteBancaireDTO>) session.getAttribute("listCompteBancaire");
+					for (CompteBancaireDTO e : listecb) {
+				%>
+				</select></td>
+			</tr>
+			<tr>
+			<tr>
+				<td><input type="submit"
+					<%if (session.getAttribute("dto") != null) {%> value="Valider"
+					<%} else {%> value="Ajouter" <%}%> /></td>
+			</tr>
+		</table>
+	</form>

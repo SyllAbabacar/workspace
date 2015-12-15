@@ -1,0 +1,20 @@
+package tn.ipsas.dao;
+
+import java.util.ArrayList;
+
+import javax.ejb.Local;
+
+import tn.ipsas.model.ClientBanque;
+
+@Local
+public interface ClientBanqueDAOLocal {
+	void save(ClientBanque c);
+
+	void remove(ClientBanque c);
+
+	ClientBanque getById(String cin);
+	
+	void update(ClientBanque clientBnaque);
+
+	ArrayList<ClientBanque> getAll();
+}
